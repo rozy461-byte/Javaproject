@@ -184,7 +184,9 @@ pipeline {
           }                                                                                                                        
                   
           always {                                                                                                                 
+            node {  
               sh 'docker image prune -f || true'
+            }
           }                                                                                                                        
       }           
   }
