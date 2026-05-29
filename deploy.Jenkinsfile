@@ -26,7 +26,7 @@ pipeline {
         IMAGE_TAG       = "${env.GIT_COMMIT.take(7)}"
         
         // Deployment server configuration
-        DEPLOY_SERVER   = '98.92.218.49'
+        DEPLOY_SERVER   = '75.101.225.244'
         DEPLOY_USER     = 'jenkins'
         DEPLOY_PORT     = '22'
         APP_PORT        = '8080'
@@ -216,14 +216,14 @@ ENDSSH
                             apk add --no-cache curl
                         fi
 
-                        echo "=== Checking App on http://${DEPLOY_SERVER}:${APP_PORT}/ ==="
+                        echo "=== Checking App on http://${DEPLOY_SERVER}:${APP_PORT}/health ==="
                         
                         # Giving the Spring Boot app time to initialize and connect to DB
                         sleep 30
                         
                         # [CHANGE: We use the root path since actuator is returning 404]
                         # -f ensures the pipeline fails if the response is 4xx or 5xx
-                        curl -f http://${DEPLOY_SERVER}:${APP_PORT}/ || exit 1
+                        curl -f http://${DEPLOY_SERVER}:${APP_PORT}/health || exit 1
                         # [END CHANGE]
                         
                         echo "✅ Application is healthy!"
