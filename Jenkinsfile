@@ -55,6 +55,10 @@ pipeline {
                       reuseNode true
                   }
               }
+
+              
+
+
               steps {
                   withSonarQubeEnv('SonarQube') {
                       sh './mvnw -B compile sonar:sonar'
@@ -183,8 +187,6 @@ pipeline {
               """
           }                                                                                                                        
                   
-          always {
-            sh 'docker image prune -f || true'
-        }                                                                                                                
+                                                                                               
       }           
   }
